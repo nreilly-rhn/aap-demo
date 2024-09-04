@@ -29,7 +29,8 @@
     - name: Dump the terraform files
       ansible.builtin.shell:
         cmd: |
-          cat /tmp/terraform/provider.tf
+          cat /tmp/terraform/*
+
     - name: Run terraform
       cloud.terraform.terraform:
         project_path: "/tmp/terraform/"
