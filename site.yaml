@@ -1,0 +1,9 @@
+- name: Gather and print local facts
+  # quay.io/rhn_support_nreilly/terraform-ee
+  hosts: localhost
+  become: true
+  gather_facts: true
+  tasks:
+    - name: Print facts
+      ansible.builtin.debug:
+        var: ansible_facts
