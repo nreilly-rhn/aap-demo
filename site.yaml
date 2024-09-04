@@ -7,11 +7,15 @@
     - name: Print facts
       ansible.builtin.debug:
         var: ansible_facts
+
     - name: Copy terraform module to work_dir
       ansible.builtin.copy:
         src: install.tf
         dest: "/tmp/terraform/"
         mode: "0664"
+      with_items:
+        - install.tf
+        - provider.tf
 
     - name: Run terraform
       cloud.terraform.terraform:
