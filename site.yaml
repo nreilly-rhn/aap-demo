@@ -1,7 +1,7 @@
 - name: Gather and print local facts
   # quay.io/rhn_support_nreilly/terraform-ee
   hosts: localhost
-  become: true
+  # become: true
   gather_facts: true
   tasks:
     - name: Print facts
