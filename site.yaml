@@ -8,18 +8,24 @@
       ansible.builtin.debug:
         var: ansible_facts
 
+    - name: Ensure director exists
+      ansible.builtin.file:
+        path: /tmp/terraform/
+        state: directory
+        mode: 0755
+
     - name: Copy terraform module to work_dir
       ansible.builtin.copy:
         src: install.tf
-        dest: "/tmp/terraform/install.tf"
+        dest: /tmp/terraform/
         mode: "0664"
 
     - name: Copy terraform files to work_dir
       ansible.builtin.template:
         src: provider.tf
-        dest: /tmp/terraform/provider.tf
+        dest: /tmp/terraform/
         mode: "0664"
-    
+
     - name: Dump the terraform files
       ansible.builtin.shell:
         cmd: |
