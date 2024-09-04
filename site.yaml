@@ -1,7 +1,6 @@
 - name: Gather and print local facts
   # quay.io/rhn_support_nreilly/terraform-ee
   hosts: localhost
-  # become: true
   gather_facts: true
   tasks:
     - name: Print facts
@@ -16,20 +15,20 @@
 
     - name: Copy terraform module to work_dir
       ansible.builtin.copy:
-        src: install.tf
+        src: files/*
         dest: /tmp/terraform/
         mode: "0664"
 
     - name: Copy terraform files to work_dir
       ansible.builtin.template:
-        src: provider.tf
+        src: templates/*
         dest: /tmp/terraform/
         mode: "0664"
 
     - name: Dump the terraform files
       ansible.builtin.shell:
         cmd: |
-          cat /tmp/terraform/*
+          cat /tmp/terraform/templates/*
 
     - name: Run terraform
       cloud.terraform.terraform:
