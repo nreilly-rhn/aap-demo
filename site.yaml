@@ -10,7 +10,7 @@
 
     - name: Copy terraform module to work_dir
       ansible.builtin.copy:
-        src: install.tf
+        src: "{{ item }}"
         dest: "/tmp/terraform/"
         mode: "0664"
       with_items:
@@ -20,7 +20,7 @@
     - name: Dump the terraform files
       ansible.builtin.shell:
         cmd: |
-          cat "/tmp/terraform/*"
+          cat /tmp/terraform/provider.tf
 #    - name: Run terraform
 #      cloud.terraform.terraform:
 #        project_path: "/tmp/terraform/"
