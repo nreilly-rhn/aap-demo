@@ -17,10 +17,14 @@
         - install.tf
         - provider.tf
 
-    - name: Run terraform
-      cloud.terraform.terraform:
-        project_path: "/tmp/terraform/"
-        force_init: true
-        provider_upgrade: true
-        state: present
-      register: network_output
+    - name: Dump the terraform files
+      ansible.builtin.shell:
+        cmd: |
+          cat "/tmp/terraform/*"
+#    - name: Run terraform
+#      cloud.terraform.terraform:
+#        project_path: "/tmp/terraform/"
+#        force_init: true
+#        provider_upgrade: true
+#        state: present
+#      register: network_output
