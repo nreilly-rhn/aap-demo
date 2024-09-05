@@ -20,15 +20,13 @@
         recurse: no
       register: terraform_files
         
-    - name: Copy terraform module to work_dir
+    - name: Copy terraform files to work_dir
       ansible.builtin.copy:
-        src: terraform/files/{{item}}
+        src: terraform/files/
         dest: /tmp/terraform/
         mode: "0664"
-      with_items:
-      - "{{ terraform_files.files }}"
 
-    - name: Copy terraform files to work_dir
+    - name: Copy terraform templates to work_dir
       ansible.builtin.template:
         src: terraform/templates/terraform.tfvars.json.j2
         dest: /tmp/terraform/terraform.tfvars.json
