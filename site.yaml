@@ -15,14 +15,14 @@
 
     - name: Get list of files to copy
       ansible.builtin.find:
-        path: files/
+        path: terraform/files/
         file_type: file
         recurse: no
       register: terraform_files
         
     - name: Copy terraform module to work_dir
       ansible.builtin.copy:
-        src: files/{{item}}
+        src: terraform/files/{{item}}
         dest: /tmp/terraform/
         mode: "0664"
       with_items:
@@ -30,7 +30,7 @@
 
     - name: Copy terraform files to work_dir
       ansible.builtin.template:
-        src: templates/terraform.tfvars.json.j2
+        src: terraform/templates/terraform.tfvars.json.j2
         dest: /tmp/terraform/terraform.tfvars.json
         mode: "0664"
 
