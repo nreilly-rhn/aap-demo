@@ -42,4 +42,4 @@
 
     - name: Show output
       ansible.builtin.debug:
-        msg: "{{ network_output.stdout.output }}"
+        msg: "{{ network_output.stdout }}"
