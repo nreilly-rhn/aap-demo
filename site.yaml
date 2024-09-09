@@ -17,9 +17,9 @@
       ansible.builtin.find:
         path: terraform/files/
         file_type: file
-        recurse: no
+        recurse: false
       register: terraform_files
-        
+
     - name: Copy terraform files to work_dir
       ansible.builtin.copy:
         src: terraform/files/
@@ -32,11 +32,6 @@
         dest: /tmp/terraform/terraform.tfvars.json
         mode: "0664"
 
-    - name: Dump the terraform files
-      ansible.builtin.shell:
-        cmd: |
-          ls -lasR /tmp/terraform/
-
     - name: Run terraform
       cloud.terraform.terraform:
         project_path: "/tmp/terraform/"
@@ -44,3 +39,7 @@
         provider_upgrade: true
         state: present
       register: network_output
+
+    - name: Show output
+      ansible.builtin.debug:
+        msg: "{{ network_output }}"
